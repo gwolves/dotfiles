@@ -1,429 +1,139 @@
-" @wookayin's vimrc file
-" https://dotfiles.wook.kr/vim/vimrc
+" Vimrc file, http://phuzz.org
+
+" Vundle.vim
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'L9'
+" Git plugin not hosted on GitHub
+Plugin 'git://git.wincent.com/command-t.git'
+" git repos on your local machine (i.e. when working on your own plugin)
+"Plugin 'file:///home/gmarik/path/to/plugin'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Avoid a name conflict with L9
+"Plugin 'user/L9', {'name': 'newL9'}
+
+" my
+Plugin 'The-NERD-tree'
+Plugin 'taglist-plus'
+Plugin 'AutoComplPop'
+Plugin 'snipMate'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
 "
-" https://github.com/wookayin/dotfiles
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
+"
+
+"set nocompatible    " use vim defaults
+set ls=2            " allways show status line
+set tabstop=4       " numbers of spaces of tab character
+set shiftwidth=4    " numbers of spaces to (auto)indent
+set scrolloff=3     " keep 3 lines when scrolling
+set showcmd         " display incomplete commands
+set hlsearch        " highlight searches
+set incsearch       " do incremental searching
+set ruler           " show the cursor position all the time
+set visualbell t_vb=    " turn off error beep/flash
+set novisualbell    " turn off visual bell
+set nobackup        " do not keep a backup file
+set number          " show line numbers
+set ignorecase      " ignore case when searching 
+"set noignorecase   " don't ignore case
+set title           " show title in console title bar
+set ttyfast         " smoother changes
+"set ttyscroll=0        " turn off scrolling, didn't work well with PuTTY
+set modeline        " last lines in document sets vim mode
+set modelines=3     " number lines checked for modelines
+set shortmess=atI   " Abbreviate messages
+set nostartofline   " don't jump to first character when paging
+set whichwrap=b,s,h,l,<,>,[,]   " move freely between files
+"set viminfo='20,<50,s10,h
+set fileencoding=utf-8
+set autoindent     " always set autoindenting on
+set smartindent        " smart indent
+set cindent            " cindent
+"set noautoindent
+"set nosmartindent
+"set nocindent   
+
+"set autowrite      " auto saves changes when quitting and swiching buffer
+"set expandtab      " tabs are converted to spaces, use only when required
+"set sm             " show matching braces, somewhat annoying...
+"set nowrap         " don't wrap lines
+"set mouse=a
+syntax on           " syntax highlighing
+filet plugin indent on
+autocmd FileType * set tabstop=2|set shiftwidth=2|set expandtab
+autocmd FileType python set tabstop=4|set shiftwidth=4|set expandtab
 
-
-"""""""""""""""""""""""""""
-" 1. General Settings
-"""""""""""""""""""""""""""
-
-syntax on
-set nocompatible
-
-" use path '~/.vim' even on non-unix machine
-set runtimepath+=~/.vim
-
-" load plugins with pathogen
-try
-	runtime bundle/vim-pathogen/autoload/pathogen.vim
-	call pathogen#infect()
-catch
-endtry
-
-" basic displays
-set number					" show line numbers
-set ruler
-
-" input settings
-set bs=indent,eol,start		" allow backspaces over everything
-set autoindent
-set smartindent
-set pastetoggle=<F8>
-
-set nowrap
-set textwidth=0				" disable automatic line breaking
-set cursorline
-
-" tab settings
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-
-" tab navigation
-set showtabline=2			" always show tab pannel
-
-set scrolloff=3
-
-" search
-set ignorecase				" case-insensitive by default
-set smartcase				" case-sensitive if keyword contains both uppercase and lowercase
-set incsearch
-set hlsearch
-
-" listchars for whitespaces
-set list
-set listchars=tab:»\ ,trail:·,extends:>,precedes:<
-
-" wildmenu settings
-set wildmenu
-set wildmode=list:longest,full
-set wildignore=*.swp,*.swo,*.class
-
-" status line
-set laststatus=2			" show anytime
-
-
-if isdirectory(expand("~/.vim/bundle/vim-airline"))
-	" use airline, with powerline-ish theme
-	let g:airline_theme='powerlineish'
-	let g:airline_powerline_fonts=1
-
-	" suppress mixed-indent warning for javadoc-like comments (/** */)
-	let g:airline#extensions#whitespace#mixed_indent_algo = 1
-else
-	" native customized statusline by fallback
-	set statusline=%1*%{winnr()}\ %*%<\ %f\ %h%m%r%=%l,%c%V\ (%P)
-endif
-
-
-" mouse behaviour
-set mouse=nvc
-set ttymouse=xterm2
-
-" encoding and line ending settings
-set encoding=utf-8
-set fileencodings=utf-8,cp949,latin1
-set fileformats=unix,dos
-
-" split and autocomplete settings
-set splitbelow              " preview window at bottom
-
-" no fucking swap and backup files
-set noswapfile
-set nobackup
-
-" miscellanious
-set showmode
-set showcmd
-
-set visualbell
-set history=1000
-set undolevels=1000
-set lazyredraw				" no redrawing during macro execution
-
-set mps+=<:>
-
-" when launching files via quickfix, CtrlP, or something else,
-" first switch to existing tab (if any) that contains the target buffer,
-" or open a new buffer by splitting window in the current tab otherwise.
-set switchbuf+=usetab,split
-
-" diff: ignore whitespaces
-set diffopt+=iwhite
-
-" jump to the last position when reopening a file
-if has("autocmd")
-  let s:last_position_disable_filetypes = ['gitcommit']
-  au BufReadPost * if index(s:last_position_disable_filetypes, &ft) < 0 && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"zz" | endif
-endif
-
-
-""""""""""""""""""""""""""""""""
-" 2. Key and Functional Mappings
-""""""""""""""""""""""""""""""""
-
-" the leader key
-let mapleader=","			" comma is the <Leader> key.
-
-" navigation key mapping
-map k gk
-map j gj
-sunmap k
-sunmap j
-
-nmap <up> gk
-nmap <down> gj
-imap <up> <c-o>gk
-imap <down> <c-o>gj
-
-" Ignore errornous input in Mac OS X
-imap <D-space> <Nop>
-
-" window navigation
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-
-" Tab navigations
-nnoremap <C-t>     :tabnew<CR>
-nnoremap <C-S-tab> :tabprevious<CR>
-nnoremap <C-tab>   :tabnext<CR>
-
-" Alternative tab navigations (@seealso gt, gT)
-" (terminals might capture <Ctrl-t> or something else)
-nnoremap <leader>tn  :tabnext<CR>
-nnoremap <leader>tp  :tabprev<CR>
-
-" Handy tab navigations: <Alt-num>
-nnoremap 1 1gt
-nnoremap 2 2gt
-nnoremap 3 3gt
-nnoremap 4 4gt
-nnoremap 5 5gt
-nnoremap 6 6gt
-nnoremap 7 7gt
-nnoremap 8 8gt
-nnoremap 9 9gt
-
-" do not exit from visual mode when shifting
-" (gv : select the preivous area)
-vnoremap < <gv
-vnoremap > >gv
-
-" [F5] Make
-if isdirectory(expand("~/.vim/bundle/vim-dispatch"))
-	" use vim-dispatch if exists
-	map <F5> <ESC>:w<CR>:Make<CR>
-	imap <F5> <ESC>:w<CR>:Make<CR>
-else
-	" otherwise, fallback to default make
-	map <F5> <ESC>:w<CR>:make!<CR>
-	imap <F5> <ESC>:w<CR>:make!<CR>
-endif
-
-" [F4] Next Error [Shift+F4] Previous Error
-map <F4> <ESC>:cn<CR>
-map [26~ <ESC>:cp<CR>
-map [1;2S <ESC>:cp<CR>
-
-" [F2] save
-imap <F2> <ESC>:w<CR>
-map <F2> <ESC><ESC>:w<CR>
-
-" Sudo Save (:Wsudo command)
-command! Wsudo w !sudo tee % > /dev/null
-
-" handy command-line mode
-nnoremap ; :
-
-" Useful leader key combinations {{{
-
-" <leader><space> : turn off search highlight
-nmap <leader><space> :noh<CR>
-
-" <leader>a : Ack!
-nnoremap <leader>a :Ack! -i<Space>
-
-" <leader>cd : switch to the directory of the current buffer
-nmap <leader>cd :cd %:p:h<CR>
-
-" <leader>r : screen sucks, redraw everything
-nnoremap <leader>r :redraw!<CR>
-
-" <leader>src : source ~/.vimrc
-nnoremap <leader>src :source ~/.vimrc<CR>
-
-" <leader>y, <leader>p : yank to or paste from the system clipboard
-noremap <leader>y "*y
-noremap <leader>p "*p
-
-" <leader>w : save
-nnoremap <leader>w :w!<CR>
-
-" <leader>S : Strip trailing whitespaces
-nnoremap <leader>S :call StripTrailingWhitespaces()<CR>
-
-" <leader>df : diffthis
-nnoremap <leader>df :diffthis<CR>
-
-" }}}
-
-"""""""""""""""""""""""""""""""""
-" 3. Colors, Highlight and Syntax
-"""""""""""""""""""""""""""""""""
-
-" color settings
-" @see http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
-set t_Co=256				" use 256 color
-set bg=dark
-
-if &term =~ '256color'
-	" Disable Background Color Erase (BCE) so that color schemes
-	" work properly when Vim is used inside tmux and GNU screen.
-	set t_ut=
-endif
-
-" apply base theme
-colorscheme xoria256
-
-" override more customized colors
-highlight StatusLine    ctermfg=LightGreen
-
-highlight LineNr        ctermfg=248 ctermbg=233 guifg=#a8a8a8 guibg=#121212
-highlight SignColumn    ctermfg=248 ctermbg=233 guifg=#a8a8a8 guibg=#121212
-
-highlight Normal        ctermfg=255 guifg=white
-highlight Comment       ctermfg=035 guifg=#38B04A
-highlight Constant      ctermfg=204 guifg=#ff5f87
-highlight PreProc       ctermfg=219 guifg=#ffafff
-highlight SpecialKey    ctermfg=242 guifg=#666666
-
-" no underline, current cursor line
-highlight CursorLine	cterm=none
-
-" show cursorline for active window only
-augroup NrHighlight
-  autocmd!
-  autocmd BufEnter * setlocal cursorline
-  autocmd BufLeave * setlocal nocursorline
-augroup END
-
-" IDE settings
-filetype plugin on
-filetype indent on
-
-" Use spaces instead of tab in python codes
-au FileType python set expandtab
-
-" filetype detections
-au BufRead,BufNewFile /etc/nginx/* if &ft == '' | setfiletype nginx | endif
-
-" remove trailing whitespaces on save
-fun! StripTrailingWhitespaces()
-	let l = line(".")
-	let c = col(".")
-	%s/\s\+$//e
-	call cursor(l, c)
-endfun
-
-autocmd FileType c,cpp,java,javascript,html,ruby,python autocmd BufWritePre <buffer> :call StripTrailingWhitespaces()
-
-" highlight trailing whitespaces
-highlight ExtraWhitespace ctermbg=red guibg=red
-
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-
-" better popup menu colors (instead of dark black)
-highlight Pmenu ctermfg=black ctermbg=yellow
-highlight PmenuSel ctermfg=red ctermbg=white gui=bold
-
-"""""""""""""""""""""""""""
-" 4. GUI Options
-"""""""""""""""""""""""""""
-
-" gui settings
 if has("gui_running")
-
-	if has("unix")
-		let s:uname = substitute(system("uname -s"), '\n', '', '')
-	endif
-
-	if has("gui_win32")
-		language mes en			" use english messages (korean characters broken)
-		set langmenu=none		" use english context menus (korean characters broken)
-		set guioptions-=T		" exclude toolbar
-		set guioptions-=m		" exclude menubar
-
-		" font setting for windows
-		set guifont=Consolas:h11:cANSI
-		set guifontwide=GulimChe:h12:cDEFAULT
-
-	elseif has("gui_gtk2")
-		" font setting for Ubuntu linux (GTK)
-		set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
-
-	elseif has("unix") && s:uname == "Darwin"
-		" font setting for Mac OS X (Darwin)
-		set guifont=Monaco\ for\ Powerline:h12
-		set guifontwide=Apple\ SD\ Gothic\ Neo\ UltraLight:h12
-	endif
-
+    " See ~/.gvimrc
+    set guifont=Monospace\ 10  " use this font 
+    set lines=50       " height = 50 lines
+    set columns=100        " width = 100 columns
+    set background=light   " adapt colors for background
+    set selectmode=mouse,key,cmd
+		"set keymodel=
+else
+    colorscheme evening    " use this color scheme
+    set background=dark        " adapt colors for background
 endif
 
+if has("autocmd")
+    " Restore cursor position
+    au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
-"""""""""""""""""""""""""""
-" 5. Plugin Settings
-"""""""""""""""""""""""""""
+    " Filetypes (au = autocmd)
+    au FileType helpfile set nonumber      " no line numbers when viewing help
+    au FileType helpfile nnoremap <buffer><cr> <c-]>   " Enter selects subject
+    au FileType helpfile nnoremap <buffer><bs> <c-T>   " Backspace to go back
+    
+    " When using mutt, text width=72
+    au FileType mail,tex set textwidth=72
+    au FileType cpp,c,java,sh,pl,php,asp  set autoindent
+    au FileType cpp,c,java,sh,pl,php,asp  set smartindent
+    au FileType cpp,c,java,sh,pl,php,asp  set cindent
+    "au BufRead mutt*[0-9] set tw=72
+    
+    " Automatically chmod +x Shell and Perl scripts
+    "au BufWritePost   *.sh             !chmod +x %
+    "au BufWritePost   *.pl             !chmod +x %
 
-" CtrlP.vim {{{
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|bin)|(\.(ico|git|svn))$'
-" }}}
-
-" CtrlP-Z {{{
-let g:ctrlp_z_nerdtree = 1
-let g:ctrlp_extensions = ['Z', 'F']
-
-nnoremap <leader>z :CtrlPZ<CR>
-nnoremap <leader>f :CtrlPF<CR>
-
-command! Z CtrlPZ
-command! F CtrlPF
-
-" }}}
-
-" NerdTree {{{
-
-" change CWD when the NERDtree is first loaded to the directory initialized in
-" (e.g. change CWD to the directory hitted by CtrlPZ)
-let g:NERDTreeChDirMode = 1
-
-" }}}
-
-" UltiSnips {{
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-" }}}
-
-" vim-pandoc {{{
-
-" disable automatic folding
-let g:pandoc#modules#disabled = ["folding"]
-
-" disable conceals
-let g:pandoc#syntax#conceal#use = 0
-
-" }}}
-
-
-" python-mode {{{
-
-" disable code folding by default
-let g:pymode_folding = 0
-
-" disable rope (terribly slow), in favor of jedi-vim
-let g:pymode_rope = 0
-
-" prefer jedi's <leader>r (rename), instead of run
-" however, jedi resets all the highlight :( - why?
-let g:pymode_run = 0
-
-" }}}
-
-
-" fugitive {{{
-
-" key mappings
-nnoremap <leader>gd :Gvdiff<CR>
-nnoremap <leader>gD :Gvdiff HEAD<CR>
-nnoremap <leader>gs :Gstatus<CR>:20wincmd +<CR>
-nnoremap <leader>gw :Gwrite<CR>
-nnoremap <leader>gb :Gblame -w<CR>:vertical resize 10<CR>
-nnoremap <leader>gci :Gcommit --verbose<CR>
-
-" }}}
-
-" gundo key mappings and options
-let g:gundo_right = 1   " show at right
-nnoremap <leader>G :GundoToggle<CR>
-
-" tagbar key mappings
-nnoremap <leader>T :TagbarToggle<CR>
-
-
-
-"""""""""""""""""""""""""""
-" Extra Settings
-"""""""""""""""""""""""""""
-
-" Use local vimrc if available
-if filereadable(expand("\~/.vimrc.local"))
-	source \~/.vimrc.local
+    " File formats
+    au BufNewFile,BufRead  *.pls    set syntax=dosini
+    au BufNewFile,BufRead  modprobe.conf    set syntax=modconf
+	au BufNewFile,BufRead  *.less	set syntax=less
+	au BufNewFile,BufRead  *.jade	set syntax=jade
 endif
+
+" Keyboard mappings
+map <F2> :w\|!python % <CR>
+nmap <F7> :NERDTree<CR>
+nmap <F8> :Tlist<CR>
