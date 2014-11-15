@@ -1,3 +1,4 @@
-.*.sw[a-z]
-.netrwhist
-Session.vim
+# Global gitignore.
+
+# Vim
+.*.s[a-w][a-z]
