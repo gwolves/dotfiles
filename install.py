@@ -21,7 +21,7 @@ tasks = {
 
     # ZSH
     '~/.zshrc'    : 'zsh/zshrc',
-    '~/.oh-my-zsh/' : 'zsh/oh-my-zsh/'
+    '~/.oh-my-zsh' : 'zsh/oh-my-zsh',
 
     # X
     '~/.Xmodmap' : 'Xmodmap',
