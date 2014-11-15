@@ -20,17 +20,8 @@ tasks = {
     '~/.gitignore' : 'git/gitignore',
 
     # ZSH
-    '~/.zprezto'  : 'zsh/zprezto',
-    '~/.zsh'      : 'zsh',
-    '~/.zlogin'   : 'zsh/zlogin',
-    '~/.zlogout'  : 'zsh/zlogout',
-    '~/.zpreztorc': 'zsh/zpreztorc',
-    '~/.zprofile' : 'zsh/zprofile',
-    '~/.zshenv'   : 'zsh/zshenv',
     '~/.zshrc'    : 'zsh/zshrc',
-
-    # Bins
-    '~/.local/bin/fasd' : 'zsh/fasd/fasd',
+    '~/.oh-my-zsh/' : 'zsh/oh-my-zsh/'
 
     # X
     '~/.Xmodmap' : 'Xmodmap',
