@@ -135,5 +135,5 @@ endif
 
 " Keyboard mappings
 map <F2> :w\|!python % <CR>
-nmap <F7> :NERDTree<CR>
+nmap <F7> :NERDTreeToggle<CR>
 nmap <F8> :Tlist<CR>
