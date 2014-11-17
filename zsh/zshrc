@@ -52,9 +52,11 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/gwolves/Work/android-sdk-linux/tools:/home/gwolves/Work/android-sdk-linux/platform-tools"
+bindkey "\e[1~" beginning-of-line
+bindkey "\e[4~" end-of-line
 
 # set xmodmap
-if [ -f "$HOME/.Xmodmap" ] ; then
+if [ -f "/usr/bin/xmodmap" ] && [ -f "$HOME/.Xmodmap" ] ; then
   xmodmap "$HOME/.Xmodmap"
 fi
 
@@ -64,7 +66,9 @@ alias rm='rm -i'
 # set virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
+if [ -f "/usr/local/bin/virtualenvwrapper.sh" ] ; then
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 # set android sdk
 export PATH=${PATH}:~/Work/android-sdk-linux/tools:~/Work/android-sdk-linux/platform-tools
