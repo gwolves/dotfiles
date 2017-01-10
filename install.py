@@ -24,7 +24,7 @@ tasks = {
     '~/.oh-my-zsh' : 'zsh/oh-my-zsh',
 
     # X
-    '~/.Xmodmap' : 'Xmodmap',
+    #'~/.Xmodmap' : 'Xmodmap',
 }
 
 ################# END OF FIXME #################
